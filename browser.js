@@ -103,6 +103,18 @@
         // mobile version
         var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
 
+        // cookie support
+        var cookieEnabled = false;
+        try {
+            // Create cookie
+            document.cookie = 'cookietest=1';
+            var ret = document.cookie.indexOf('cookietest=') != -1;
+            // Delete cookie
+            document.cookie = 'cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT';
+            cookieEnabled = ret;
+        }
+        catch (e) {
+        }
 
         // system
         var os = unknown;
@@ -172,6 +184,7 @@
         browserVersion: version,
         mobile: mobile,
         os: os,
-        osVersion: osVersion
+        osVersion: osVersion,
+        cookies: cookieEnabled
     };
 }(this));
