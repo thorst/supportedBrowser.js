@@ -62,7 +62,7 @@
                 //  at: https://developers.google.com/chrome/mobile/docs/user-agent?hl=ja
                 //  No mention of chrome in the user agent string. However it does mention CriOS, which presumably
                 //  can be keyed on to detect it.
-                if (verOffset = nAgt.indexOf('CriOS') != -1) {
+                if ((verOffset = nAgt.indexOf('CriOS')) != -1) {
                     //Chrome on iPad spoofing Safari...correct it.
                     browser = 'Chrome';
                     //Don't believe there is a way to grab the accurate version number, so leaving that for now.
@@ -289,12 +289,5 @@
         browserFeatures: getBrowserFeatures(),
         device: getDevice(),
         os: getOS()
-   
-    //    },
-    //    os: {
-    //        name: os,
-    //        versionString: osVersion,
-    //    },
-
     };
 })(window, document);
