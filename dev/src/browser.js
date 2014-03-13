@@ -50,6 +50,12 @@
                 version = nAgt.substring(verOffset + 7);
 
 
+                // Chrome on iPad identifies itself as Safari. However it does mention CriOS.
+            } else if ((verOffset = nAgt.indexOf('CriOS')) != -1) {
+                browser = 'Chrome';
+                version = nAgt.substring(verOffset + 6);
+                
+
                 // Safari
             } else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
                 browser = 'Safari';
@@ -58,17 +64,6 @@
                     version = nAgt.substring(verOffset + 8);
                 }
 
-                // Chrome on iPad identifies itself as Safari. Actual results do not match what Google claims
-                //  at: https://developers.google.com/chrome/mobile/docs/user-agent?hl=ja
-                //  No mention of chrome in the user agent string. However it does mention CriOS, which presumably
-                //  can be keyed on to detect it.
-                if ((verOffset = nAgt.indexOf('CriOS')) != -1) {
-                    //Chrome on iPad spoofing Safari...correct it.
-                    browser = 'Chrome';
-                    //Don't believe there is a way to grab the accurate version number, so leaving that for now.
-                    version = nAgt.substring(verOffset + 7);
-                }
-            
 
             // Firefox
             } else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
@@ -132,7 +127,6 @@
                      { s: 'psp', r: /psp|Playstation Portable/ },
                      { s: 'sgh', r: /sgh/ },
                      { s: 'smartphone', r: /smartphone/ },
-
                      { s: 'symbian', r: /symbian/ },
                      { s: 'treo mini', r: /treo mini/ },
                      { s: 'SonyEricsson', r: /SonyEricsson/ },
@@ -172,7 +166,9 @@
 
             // if they are on tablet or phone
             var is_mobile = is_tablet || is_phone;
-
+            if (!is_mobile) {
+                var mobile = /Mobile|mini|Fennec|Android/.test(nVer);
+            }
 
             return {
                 screen: {
@@ -281,7 +277,6 @@
             }
         ;
 
-  console.log(  );
 
   window.browserInfo = {
         userAgent: navigator.userAgent,
