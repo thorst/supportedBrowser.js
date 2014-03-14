@@ -167,7 +167,7 @@
             // if they are on tablet or phone
             var is_mobile = is_tablet || is_phone;
             if (!is_mobile) {
-                var mobile = /Mobile|mini|Fennec|Android/.test(nVer);
+                is_mobile = /Mobile|mini|Fennec|Android/.test(nVer);
             }
 
             return {
@@ -249,7 +249,7 @@
 
             return {
                 name: os,
-                version: osVersion
+                versionString: osVersion
             };
         },
             getBrowserFeatures = function () {
