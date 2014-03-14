@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jquery-idletimer : provides you a way to monitor user activity with a page." />
+    <title>supportedBrowsers.js</title>
+
+    <!-- jQuery and idleTimer -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../src/browser.js"></script>
+    <script src="../src/supported.js"></script>
+
+    <!-- Bootstrap/respond (ie8) and moment -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.js"></script>
+
+    <!-- Respond.js proxy on external server -->
+    <link href="//netdna.bootstrapcdn.com/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+    <link href="respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+    <script src="respond.proxy.js"></script>
+    <style>
+        /*body {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }*/
+
+        .btn {
+            padding: 5px 6px;
+        }
+
+
+        .bs-docs-top {
+            background-color: #EEEEEE;
+            border-radius: 4px;
+            color: #999999;
+            float: left;
+            font-weight: 500;
+            padding: 7px 15px;
+        }
+
+            .bs-docs-top:hover {
+                background-color: #222222;
+                color: #CCCCCC;
+                text-decoration: none;
+            }
+        .bs-docs-top.affix {
+            bottom: 15px;
+            position: fixed;
+            right: 15px;
+            z-index: 1030;
+        }
+        .bs-docs-top.affix-top {
+            left: -999px;
+            position: fixed;
+            top: 1px;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-offset-top="200">
+    <style>
+        #banner {
+            display: none;
+            border-radius: 0;
+            right: 0;
+            left: 0;
+            text-align: center;
+            min-height: 30px;
+            margin-bottom: 0;
+            top: 0;
+            z-index: 1030;
+            line-height: 30px;
+            padding: 0;
+        }
+
+            #banner.bannerVisible {
+                display: block;
+            }
+
+            #banner:hover {
+                color: #66512C;
+            }
+
+
+
+
+
+        @media (min-width: 768px) {
+            #banner {
+                min-height: 40px;
+                line-height: 40px;
+            }
+        }
+    </style>
+
+    <a id="banner" href="#" class="alert alert-warning">
+        Possibly Unsupported Browser. Read More.
+    </a>
+    <div id="mainNav" class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Jquery-idletimer</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Debug</a></li>
+                    <li><a href="https://github.com/thorst/jquery-idletimer">Documentation</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://github.com/thorst/jquery-idletimer/zipball/master">Zip</a></li>
+                    <li><a href="https://github.com/thorst/jquery-idletimer/tarball/master">Tar</a></li>
+                    <li><a href="https://github.com/thorst/jquery-idletimer" target="_github">Github</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="mainContent" class="container">
+        <h1>Concept</h1>
+        <p>This is a similar page to what we have deployed</p>
+        <p>Keep the markup as simple as possible, since they are most likely already having issues.</p>
+
+        <h1>Support</h1>
+        <p>
+            Due to a large number of available browsers and limited resources
+            we only support the major browsers on the major operating systems.
+        </p>
+        <p>
+            PLEASE NOTE: To provide our customers the most effective and secure online access to their accounts, we are continually upgrading
+            our online services. As we add new features and enhancements to our service, older browser versions or Internet devices may not
+            support these new standards. Upgrading to a new version will enhance your security and experience on our website.
+        </p>
+        <p>Use the resources below to possible fix any issues you are experiencing</p>
+        <ol>
+            <li><a href="#browserHeader">Ensure browser support</a></li>
+            <li><a href="#clearCache">Clear browser cache</a></li>
+            <li><a href="tel:555-555-5555">Call 555-555-5555</a></li>
+        </ol>
+        <h2 id="browserHeader">Browser Support</h2>
+        <div class="panel panel-default">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Result</th>
+                        <th>Status</th>
+                        <th>Fix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>JavaScript:</td>
+                        <td id="javascript">Disabled</td>
+                        <td id="javascriptStatus"><span class="label label-danger">Unsupported</span></td>
+                        <td><a href="#enableJavascript">Learn More</a></td>
+                    </tr>
+                    <tr>
+                        <td>Platform:</td>
+                        <td id="platform"></td>
+                        <td id="platformStatus"><span class="label label-warning">Unsupported</span></td>
+                        <td><a href="#updateOS">Learn More</a></td>
+                    </tr>
+                    <tr>
+                        <td>Browser:</td>
+                        <td id="browser"></td>
+                        <td id="browserStatus"><span class="label label-danger">Unsupported</span></td>
+                        <td><a href="#updateBrowser">Learn More</a></td>
+                    </tr>
+                    <tr>
+                        <td>Window Size:</td>
+                        <td id="resolution"></td>
+                        <td id="resolutionStatus"><span class="label label-danger">Unsupported</span></td>
+                        <td><a href="#windowSize">Learn More</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>Cookies:</td>
+                        <td id="cookies">Disabled</td>
+                        <td id="cookiesStatus"><span class="label label-danger">Unsupported</span></td>
+                        <td><a href="#enableCookies">Learn More</a></td>
+                    </tr>
+
+
+                </tbody>
+            </table><div class="panel-footer"><b>Conclusion</b>: <span id="conclusion"></span></div>
+        </div>
+        <h1>Table of contents</h1>
+        <ul>
+            <li><a href="#whatBrowser">What is an operating system</a></li>
+            <li><a href="#whatBrowser">What is a browser</a></li>
+            <li><a href="#usedToWork">But this used to work on my device...</a></li>
+            <li><a href="#clearCache">Clear browser cache</a></li>
+            <li><a href="#enableJavascript">Enable JavaScript</a></li>
+            <li><a href="#updateOS">Update you operating system</a></li>
+            <li><a href="#updateBrowser">Update your browser</a></li>
+            <li><a href="#windowSize">Maximize your browser window</a></li>
+            <li><a href="#enableCookies">Enable cookies</a></li>
+            <li><a href="#newerBrowser">My new browser is not yet supported / My browser is supported, but says unsupported</a></li>
+            
+        </ul>
+
+        <h3 id="whatBrowser">What is an operating system?</h3>
+        <p>The software your computer uses to run all the different applications you use</p>
+        <h3 id="whatBrowser">What is a browser?</h3>
+        <p>The software you use to view a website</p>
+        <h3 id="usedToWork">But this used to work...</h3>
+        <p>
+            In order to support newer browsers sometimes we have to stop supporting older browsers. You may find that the website still works in these
+            older browsers, but we cannot guarantee that.
+        </p>
+
+
+        <h2 id="updateOS">Update your operating system</h2>
+        <p>
+            While updating your operating system may not always be possible, it is often the first step at maintaining support for new software and websites.
+        </p>
+        <p>
+            On desktops there is often cost involved to get the newest version and you may need a professional to install it.
+        </p>
+        <p>
+            In most cases, on hand held devices such as tablets or phones, the newest operating system is free, and easy to install.
+        </p>
+
+        <h2 id="updateBrowser">Update your browser</h2>
+        <p>
+            While our website might run without major issues in older browser versions, we do not actively test it in them and generally do not fix bugs that may appear in them.
+        </p>
+        <p>
+            Updating your browser is free and the best way to:
+            <ul>
+               
+                <li>Improved security against viruses, trojans, and malware</li>
+                <li>The browser itself starts faster</li>
+                <li>Websites load faster</li>
+                <li>Keep websites working and displaying properly</li>
+                <li>Get support from the websites you use</li>
+
+            </ul>
+        </p>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Windows XP, Vista, 7, 8</div>
+
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Browser</th>
+                        <th>Version</th>
+                        <th>Download Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Google Chrome</td>
+                        <td>Most recent two versions</td>
+                        <td><a href="https://www.google.com/intl/en/chrome/browser/">Download</a></td>
+                    </tr>
+                    <tr>
+                        <td>Mozilla Firefox</td>
+                        <td>Most recent two versions</td>
+                        <td><a href="http://www.mozilla.org/en-US/">Download</a></td>
+                    </tr>
+                    <tr>
+                        <td>Microsoft Internet Explorer</td>
+                        <td>8 and above</td>
+                        <td><a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Download</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Macintosh 10.8, 10.9</div>
+
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Browser</th>
+                        <th>Version</th>
+                        <th>Download Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Apple Safari</td>
+                        <td>7 and above</td>
+                        <td><a href="http://support.apple.com/downloads/#safari">Download</a></td>
+                    </tr>
+                    <tr>
+                        <td>Google Chrome</td>
+                        <td>Most recent two versions</td>
+                        <td><a href="https://www.google.com/intl/en/chrome/browser/">Download</a></td>
+                    </tr>
+                    <tr>
+                        <td>Mozilla Firefox</td>
+                        <td>Most recent two versions</td>
+                        <td><a href="http://www.mozilla.org/en-US/">Download</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">iOS 6, 7 (iPhone, iPad)</div>
+
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Browser</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Apple Safari</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Android</div>
+
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Browser</th>
+                        <th>Platform Version</th>
+                        <th>Download Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Android Browser</td>
+                        <td>2.3 (Gingerbread)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Firefox</td>
+                        <td>2.3 (Gingerbread), 4.0 (IceCream Sandwhich), 4.1-4.3 (Jelly Bean), 4.4 (KitKat)</td>
+                        <td><a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Download</a></td>
+                    </tr>
+                    <tr>
+                        <td>Google Chrome</td>
+                        <td>4.0 (IceCream Sandwhich), 4.1-4.3 (Jelly Bean), 4.4 (KitKat)</td>
+                        <td><a href="https://www.google.com/intl/en/chrome/browser/mobile/android.html">Download</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <h2 id="enableJavascript">Enable Javascript</h2>
+        <div>
+            <h3>Windows</h3>
+            <div id="pnlChromeNew">
+
+                <h4 id="chrome">
+                    Google Chrome
+                </h4>
+                <ol>
+                    <li>
+                        On the web browser menu click on the "Customize and control Google Chrome" and select "Settings".
+                    </li>
+                    <li>
+                        In the "Settings" section click on the "Show advanced settings..."
+                    </li>
+                    <li>
+                        Under the the "Privacy" click on the "Content settings...".
+                    </li>
+                    <li>
+                        When the dialog window opens, look for the "JavaScript" section and select "Allow all sites to run JavaScript (recommended)".
+                    </li>
+                    <li>
+                        Click on the "OK" button to close it.
+                    </li>
+                    <li>
+                        Close the "Settings" tab.
+                    </li>
+                    <li>
+                        Click on the "Reload this page" button of the web browser to refresh the page.
+                    </li>
+                </ol>
+
+
+            </div>
+            <div id="pnlcurrentBrowser">
+
+                <div id="pnlFirefox">
+
+                    <h4 id="firefox">
+                        Mozilla Firefox
+                    </h4>
+                    <ol>
+                        <li>In the address bar, type about:config and press Enter.</li>
+                        <li>Click "I'll be careful, I promise" if a warning message appears.</li>
+                        <li>In the search box, search for javascript.enabled</li>
+                        <li>Toggle the "javascript.enabled" preference (right-click and select "Toggle" or double-click the preference) to change the value from "false" to "true".</li>
+                    </ol>
+
+
+                </div>
+            </div>
+            <div id="pnlIE">
+
+                <h4 id="ie">
+                    Internet Explorer 9/10/11
+                </h4>
+                <ol>
+                    <li>On web browser menu click "Tools" menu and select "Internet Options".</li>
+                    <li>In the "Internet Options" window select the "Security" tab.</li>
+                    <li>On the "Security" tab click on the "Custom level..." button.</li>
+                    <li>
+                        When the "Security Settings - Internet Zone" dialog window opens, look
+                        for the "Scripting" section.
+                    </li>
+                    <li>In the "Active Scripting" item select "Enable".</li>
+                    <li>
+                        When the "Warning!" window pops out asking "Are you sure you want
+                        to change the settings for this zone?" select "Yes".
+                    </li>
+                    <li>
+                        In the "Internet Options" window click on the "OK" button to
+                        close it.
+                    </li>
+                    <li>Click on the "Refresh" button of the web browser to refresh the page.</li>
+                </ol>
+
+            </div>
+            <div id="pnlIElte8">
+
+                <h4 id="ielte8">
+
+                    Internet Explorer 8
+                </h4>
+                <ol>
+                    <li>On web browser menu click "Tools" and select "Internet Options".</li>
+                    <li>In the "Internet Options" window select the "Security" tab.</li>
+                    <li>On the "Security" tab click on the "Custom level..." button.</li>
+                    <li>
+                        When the "Security Settings - Internet Zone" dialog window opens, look
+                        for the "Scripting" section.
+                    </li>
+                    <li>In the "Active Scripting" item select "Enable".</li>
+                    <li>
+                        When the "Warning!" window pops out asking "Are you sure you want
+                        to change the settings for this zone?" select "Yes".
+                    </li>
+                    <li>
+                        In the "Internet Options" window click on the"OK" button to
+                        close it.
+                    </li>
+                    <li>Click on the "Refresh" button of the web browser to refresh the page.</li>
+                </ol>
+
+
+            </div>
+            <h3>Macintosh</h3>
+            <div>
+                firefox
+                <ol>
+                    <li>Select the <strong>Firefox</strong> menu item from the <strong>Apple/System bar</strong> at the top of the screen.</li>
+                    <li>From the drop-down menu, select <strong>Preferences...</strong></li>
+                    <li>Select the <strong>Content</strong> icon/tab at the top on the window.</li>
+                    <li>Then, check the <strong>Enable JavaScript</strong> checkbox.</li>
+                    <li><strong>Close</strong> the Options window to save your changes.</li>
+                    <li>Finally, <strong>refresh</strong> your browser.</li>
+                </ol>
+            </div>
+            <div>
+                safari
+                <ol>
+                    <li>Select the <strong>Safari</strong> menu item from the <strong>Apple/System bar</strong> at the top of the screen.</li>
+                    <li>From the drop-down menu, select <strong>Preferences</strong>.</li>
+                    <li>Select the <strong>Security</strong> icon/tab at the top of the window.</li>
+                    <li>Then, check the <strong>Enable JavaScript</strong> checkbox under the <strong>Web content</strong> category.</li>
+                    <li><strong>Close</strong> the window to save your changes.</li>
+                    <li>Finally, <strong>refresh</strong> your browser.</li>
+                </ol>
+
+            </div>
+            <div>
+                chrome
+                <ol>
+                    <li>Select the <strong>Chrome</strong> menu item from the Apple/System bar at the top of the screen.</li>
+                    <li>From the drop-down menu, select <strong>Preferences...</strong></li>
+                    <li>On the left, select <strong>Settings</strong></li>
+                    <li>At the bottom of the page, click <strong>Show advanced settings…</strong></li>
+                    <li>Under Privacy, select the <strong>Content settings…</strong> button</li>
+                    <li>Finally, under the JavaScript heading, select the <strong>Allow all sites to run JavaScript</strong> radio button</li>
+                </ol>
+            </div>
+
+            <h3>Android</h3>
+            <div>
+                Follow these instructions to activate and enable JavaScript on your Android.
+
+                Select Browser or Internet to open the web browser.
+                Select Menu.
+                Select More then Settings.
+                Finally select Enable JavaScript.
+            </div>
+            <h3>iOS</h3>
+            <div>
+                <h4 id="">
+                    Safari iOS 7
+                </h4>
+                <ol>
+                    <li>On the home screen click on "Settings"</li>
+                    <li>Scroll down and tap on "Safari"</li>
+                    <li>Scroll down and tap "Clear Cookies and Data"</li>
+                </ol>
+            </div>
+            <div>
+                <h4 id="">
+                    Safari iOS 6
+                </h4>
+                <ol>
+                    <li>On the home screen click on "Settings"</li>
+                    <li>Scroll down and tap on "Safari"</li>
+                    <li>Scroll down and tap "Clear Cache"</li>
+                </ol>
+            </div>
+        </div>
+
+        <h2 id="clearCache">Clear Cache</h2>
+        <h3>Windows</h3>
+        chrome
+        <ol id="idm1371840">
+            <li>
+                In the browser bar, enter:
+
+                <span class="example" xmlns:xi="http://www.w3.org/2001/XInclude">  chrome://settings/clearBrowserData</span>
+            </li>
+            <li>
+                Select the items you want to clear (e.g., <strong xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <code>
+                        Clear browsing
+                        history
+                    </code>
+                </strong>, <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Clear download history</code></strong>, <strong xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <code>
+                        Empty the
+                        cache
+                    </code>
+                </strong>, <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Delete cookies and other site and plug-in data</code></strong>).
+
+                <p>
+                    From the <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Obliterate the following items from:</code></strong> drop-down menu,
+                    you can choose the period of time for which you want to clear cached
+                    information.  To clear your entire cache, select <strong xmlns:xi="http://www.w3.org/2001/XInclude">
+                        <code>
+                            the beginning of
+                            time
+                        </code>
+                    </strong>.
+                </p>
+            </li>
+            <li>
+                Click <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Clear browsing data</code></strong>.
+            </li>
+        </ol>
+        firefox
+        <ol id="idm1312624">
+            <li>
+                From the <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Tools</code></strong> or <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>History</code></strong> menu, select
+                <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Clear Recent History</code></strong>.
+
+
+                <p>
+                    If the menu bar is hidden, press <code>Alt</code> to make it
+                    visible.
+                </p>
+
+            </li>
+            <li>
+                From the <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Time range to clear:</code></strong> drop-down menu, select the
+                desired range; to clear your entire cache, select
+                <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Everything</code></strong>.
+
+                <br><br>
+            </li>
+            <li>
+                Click the down arrow next to "Details" to choose which elements
+                of the history to clear.  Click <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Clear Now</code></strong>.
+            </li>
+        </ol>
+        ie>=8
+        <ol id="idm311952">
+            <li>
+                From the <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Tools</code></strong> or <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Safety</code></strong> menu, select <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Delete browsing history...&nbsp;</code></strong>.
+
+
+                <p>
+                    If the menu bar is hidden, press <code>Alt</code> to make it
+                    visible.
+                </p>
+            </li>
+            <li>
+                Deselect <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Preserve Favorites website data</code></strong>, and select:
+
+                <br><br>
+                <ul>
+                    <li>
+                        <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Temporary Internet files</code></strong> or <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Temporary Internet files and website files</code></strong>
+                    </li>
+                    <li>
+                        <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Cookies</code></strong> or <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Cookies and website data</code></strong>
+                    </li>
+                    <li>
+                        <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>History</code></strong>
+                    </li>
+                </ul>
+                <br>
+            </li>
+            <li>
+                Click <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Delete</code></strong>.
+            </li>
+        </ol>
+        <h3>Macintosh</h3>
+        <ol id="idm180464">
+            <li>
+                From the <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Safari</code></strong> menu, select
+                <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Reset Safari...&nbsp;</code></strong>.
+
+                <br><br>
+            </li>
+            <li>
+                From the menu, select the items you want to reset, and then click
+                <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Reset</code></strong>.  As of Safari 5.1, <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Remove all website data</code></strong>
+                covers both cookies and cache.
+            </li>
+        </ol>
+        <h3>Android</h3>
+        <ol id="idm1374592">
+            <li>
+                Start your browser.
+
+                <br><br>
+            </li>
+            <li>
+                Tap <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Menu</code></strong>, and then tap <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>More</code></strong>.
+
+                <br><br>
+            </li>
+            <li>
+                Select <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Settings</code></strong>.
+
+                <br><br>
+            </li>
+            <li>
+                Under "Privacy settings", select <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Clear cache</code></strong>, <strong xmlns:xi="http://www.w3.org/2001/XInclude">
+                    <code>
+                        Clear
+                        history
+                    </code>
+                </strong>, or <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Clear all cookie data</code></strong> as appropriate, and
+                then tap <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>OK</code></strong> to accept (or <strong xmlns:xi="http://www.w3.org/2001/XInclude"><code>Cancel</code></strong> to cancel) the
+                deletion.
+            </li>
+        </ol>
+        <h3>iOS</h3>
+        <div>
+            <h4 id="">
+                Safari iOS
+            </h4>
+            <ol>
+                <li>On the home screen click on "Settings"</li>
+                <li>Scroll down and tap on "Safari"</li>
+                <li>Scroll down and tap "Advance"</li>
+                <li>Ensure "JavaScript" is enabled</li>
+            </ol>
+        </div>
+
+
+
+        <h2 id="windowSize">Window Size</h2>
+        <p>while we support many windows sizes, if your viewing on a device is too small it may not look the best</p>
+        <p>if your using a desktop/laptop ensure the browser is maximized</p>
+
+        <div id="enableCookies">
+            <a name="what"></a>
+            <h2>How do I Enable Cookies and Disable Cookies?</h2>
+            <p class="maintextpara">
+                This section will tell you how to enable cookies (turning cookies on) and also how to disable them.
+                Since cookies are maintained by your web browser, the method for enabling or disabling them will vary depending on
+                which browser you are using.
+            </p>
+            <p class="maintextpara">
+                <b>Microsoft Internet Explorer 8.0 - 10.0</b><br>
+                Select the 'Tools-&gt;Internet Options'
+                menu item, and then open the 'Privacy' tab - you can then adjust the slider to block
+                or allow various categories of cookie. Alternatively by clicking 'Advanced...' you can
+                exercise finer control over the browser's behavior, choosing whether to accept, block, or
+                prompt for cookies originating either on the website you are visiting (first party cookies) or
+                originating from websites other than the one you are visiting (third party cookies, typically used
+                by banner advertisements hosted on an advertiser's website).
+            </p>
+            <p class="maintextpara">
+                <b>Firefox 7.0 and newer</b><br>
+                Use the 'Tools-&gt;Options' menu item (may be under the Firefox button), then choose the 'Privacy' tab.
+                Set the 'Firefox will:' option to 'Use custom settings for history'. Now you can
+                choose whether cookies are enabled for websites you visit and third party websites,
+                and if so how long they will persist. You can also use the
+                'Exceptions' button to override the settings for particular websites.
+            </p>
+           
+            <p class="maintextpara">
+                <b>Google Chrome 5.0</b><br>
+                Choose 'Options' on the 'Cutomsize and control' menu, then open the 'Under the Bonnet' tab.
+                In the 'Privacy' section, click on the 'Content settings...' button and open the 'Cookies tab.
+                Set the required cookie behaviour and use the 'Exceptions...' button (if required) to configure specific websites.
+            </p>
+            <p class="maintextpara">
+                <b>Apple Safari 5.1</b><br>
+                Choose 'Preferences...' on the 'Settings' or 'Edit' menu (Windows) or the Safari menu (MacOS), then open the 'Privacy' tab.
+                Now set the required cookie behaviour.
+            </p>
+            <p class="maintextpara">
+                <b>Apple iOS (iPhone, iPad)</b><br>
+                From the home screen tap the 'Settings' icon, then choose 'Safari'. Find the 'Accept Cookies' option and set the
+                required cookie behaviour.
+            </p>
+            <p class="maintextpara">
+                <b>Android</b><br>
+                Tap the 'Internet' icon to start the browser, then press the phone's menu button. From the list of options, choose
+                'More', and then select 'Settings'. Scroll down the resulting list and check or uncheck the 'Accept Cookies' item.
+            </p>
+            <p class="maintextpara">
+                <b>Windows Phone 7/8</b><br>
+                In Internet Explorer, tap 'More...' then  'Settings'. Check or clear the 'Allow cookies on my phone' item to set
+                the required cookie behaviour.
+            </p>
+           
+        </div>
+
+
+
+        <h3 id="newerBrowser">My new browser is not yet supported / My browser is supported, but says unsupported</h3>
+        <p>Occasionally a browser can get mis diagnosed. This can occur for a number of reasons, including extensions that are installed.</p>
+        <p>
+            If you are using the latest release of your browser, please be aware that there may be a delay in our support of the new browser release while we conduct a review to ensure it meets our security standards. We recommend that you download and install a supported browser until the new version is officially supported.
+        </p>
+
+
+
+
+
+
+
+    </div>
+
+
+   
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+    
+ 
+
+    <a class="bs-docs-top affix-top hidden-print" href="#top">Top </a>
+    <script>
+        (function ($) {
+            setTimeout(function () {
+                $('.bs-docs-top').affix();
+            }, 100);
+
+            //Define what we want to support
+            var supported = [
+            {
+                os: "Windows",
+                versions: [
+                    "8", "7", "Vista", "XP"
+                ],
+                browsers: [
+                    {
+                        browser: "Firefox",
+                        version: 25
+                    },
+                ]
+            },
+            {
+                os: "iOS",
+                versions: [
+                    "7"
+                ],
+                browsers: [
+                    {
+                        browser: "Safari",
+                        version: 7
+                    },
+                ]
+            }
+            ];
+
+            //Get whether we should support this
+            var supportedOutput = supportedBrowser(supported);
+
+            //Show banner that we dont
+
+            if (!supportedOutput.browserVersion) {
+                $("#banner,.navbar-fixed-top,#mainContent").addClass("bannerVisible");
+            }
+
+            console.log(browserInfo);
+            console.log(supportedOutput);
+
+
+            var testCnt = 0;
+            //Javascript
+            $("#javascript").html("Enabled");
+            $("#javascriptStatus span").html("Supported").removeClass("label-danger").addClass("label-success");
+            testCnt++;
+
+            // Platform
+            $("#platform").html(browserInfo.os.name + " " + browserInfo.os.versionString);
+            if (supportedOutput.os && supportedOutput.osVersion) {
+                $("#platformStatus span").html("Supported").removeClass("label-warning").addClass("label-success");
+                testCnt++;
+            }
+
+            //Browser
+            $("#browser").html(browserInfo.browser.name + " " + browserInfo.browser.version);
+            if (supportedOutput.browser && supportedOutput.browserVersion) {
+                $("#browserStatus span").html("Supported").removeClass("label-danger").addClass("label-success");
+                testCnt++;
+            }
+
+            //Resolution
+            var w = browserInfo.browserFeatures.window.width,
+                h = browserInfo.browserFeatures.window.height
+            ;
+            $("#resolution").html(w + " x " + h);
+            if (w > 300 && w > 300) {
+                $("#resolutionStatus span").html("Supported").removeClass("label-danger").addClass("label-success");
+                testCnt++;
+            }
+
+            //Cookies
+            if (browserInfo.browserFeatures.allowsCookies) {
+                $("#cookies").html("Enabled");
+                $("#cookiesStatus span").html("Supported").removeClass("label-danger").addClass("label-success");
+                testCnt++;
+            }
+
+            if (testCnt == 5) {
+                $("#conclusion").html("It looks like you should meet all the requirements");
+            } else {
+                $("#conclusion").html("It looks like one or more of the requirements failed");
+            }
+        })(jQuery);
+
+    </script>
+</body>
+
+
+
+</html>
