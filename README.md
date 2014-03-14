@@ -25,24 +25,25 @@ can't guarantee a good user experience.
 
 This helps manage expectations for users as well as aids in our support center in diagnosing issues.
 
+
 What are the main ones
 ----------
-Windows
+Windows xp,vista,7,8
 * Chrome
 * Firefox
 * Internet Explorer
 
-OSX
+OSX 10.8, 10.9
 * Safari
 * Chrome
 * Firefox
 
 Android
-* Android Browser
-* Chrome
-* Firefox
+* Android Browser 2.3 (Gingerbread)
+* Chrome 4.0 (IceCream Sandwhich), 4.1-4.3 (Jelly Bean), 4.4 (KitKat)
+* Firefox 2.3 (Gingerbread), 4.0 (IceCream Sandwhich), 4.1-4.3 (Jelly Bean), 4.4 (KitKat)
 
-iOS
+iOS 6/7
 * Safari
 
 To Use

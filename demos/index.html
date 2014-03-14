@@ -10,6 +10,7 @@
     <!-- jQuery and idleTimer -->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="../src/browser.js"></script>
+    <script src="../src/supported.js"></script>
 
     <!-- Bootstrap/respond (ie8) and moment -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -22,10 +23,10 @@
     <link href="respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
     <script src="respond.proxy.js"></script>
     <style>
-        /*body {
+        body {
             margin-top: 40px;
             margin-bottom: 40px;
-        }*/
+        }
 
         .btn {
             padding: 5px 6px;
@@ -33,61 +34,9 @@
     </style>
 </head>
 <body>
-    <style>
-     
-        .navbar-fixed-top {
-            margin-top: 30px;
-        }
+    
 
-        #banner {
-            border-radius: 0;
-            border-width: 0 0 1px;
-            left: 0;
-            position: fixed;
-            right: 0;
-            text-align: center;
-            min-height: 30px;
-            background-color: orange;
-            color: #000;
-            margin-bottom: 0;
-            top: 0;
-            z-index: 1030;
-            line-height: 30px;
-        }
-
-        .first-row {
-            margin-top: 30px;
-        }
-        #mainContent {
-            margin-top: 70px;
-        }
-        
-         @media (min-width: 768px) {
-            #banner {
-                border-radius: 0;
-                border-width: 0 0 1px;
-                left: 0;
-               /* position: relative;*/
-                right: 0;
-                min-height: 40px;
-                line-height: 40px;
-            }
-
-            .first-row {
-                margin-top: 5px;
-            }
-
-            #mainContent {
-                margin-top: 70px;
-            }
-        }
-    </style>
-
-    <a href="support">
-        <div id="banner" class="navbar" style="margin-top: 0;">
-            Possibly Unsupported Browser. Read More.
-        </div>
-    </a>
+  
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -101,12 +50,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a href="deploy.html">Deploy</a></li>
                     <li><a href="https://github.com/thorst/jquery-idletimer">Documentation</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="https://github.com/thorst/jquery-idletimer/zipball/master">Zip</a></li>
                     <li><a href="https://github.com/thorst/jquery-idletimer/tarball/master">Tar</a></li>
-                    <li><a href="https://github.com/thorst/jquery-idletimer">Github</a></li>
+                    <li><a href="https://github.com/thorst/jquery-idletimer" target="_github">Github</a></li>
                 </ul>
             </div> 
         </div>
@@ -114,15 +64,51 @@
     <div id="mainContent" class="container">
         <h2>Concept</h2>
         <p>Get minimal information and compare that with what we want to support</p>
-        <pre id="output">
-
-        </pre>
-
+        <p>If the below information isn't correct please <a href="https://github.com/thorst/Browser/issues/new">open a new issue</a></p>
+        <p>Be sure to include the entire output, then say whats wrong.</p>
+        <h3>Browser detected</h3>
+        <pre id="browserOutput"></pre>
+        <h3>Supported settings</h3>
+        <pre id="supportedConfig"></pre>
+        <h3>Supported output</h3>
+        <pre id="supportedOutput"></pre>
     </div>
     <script>
         (function ($) {
             console.log(browserInfo);
-            $("#output").html(JSON.stringify(browserInfo, undefined, 2));
+            $("#browserOutput").html(JSON.stringify(browserInfo, undefined, 2));
+
+
+            var supported = [
+            {
+                os: "Windows",
+                versions: [
+                    "8", "7", "Vista", "XP"
+                ],
+                browsers: [
+                    {
+                        browser: "Firefox",
+                        version: 26
+                    },
+                ]
+            },
+            {
+                os: "iOS",
+                versions: [
+                    "7"
+                ],
+                browsers: [
+                    {
+                        browser: "Safari",
+                        version: 7
+                    },
+                ]
+            }
+            ];
+            
+            $("#supportedConfig").html(JSON.stringify(supported, undefined, 2));
+            var supportedOutput = supportedBrowser(supported);
+            $("#supportedOutput").html(JSON.stringify(supportedOutput, undefined, 2));
         })(jQuery);
 
     </script>
