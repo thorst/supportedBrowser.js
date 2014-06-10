@@ -1,4 +1,4 @@
-<h1>supportedBrowser.js</h1>
+﻿<h1>supportedBrowser.js</h1>
 
 <p>Check for supported browser and features</p>
 
@@ -12,7 +12,7 @@
 
 <h2>What it isn't</h2>
 
-<p>This isn't the end all be all solution that can determine any browser on any platform like https://github.com/NielsLeenheer/WhichBrowser</p>
+<p>This isn't the end all, be all solution that can determine any browser on any platform like https://github.com/NielsLeenheer/WhichBrowser</p>
 
 <p>This isn't comprehensive feature detection library like https://github.com/Modernizr/Modernizr</p>
 
@@ -24,12 +24,18 @@ can't guarantee a good user experience.</p>
 
 <p>This helps manage expectations for users as well as aids in our support center in diagnosing issues.</p>
 
+<h2>Files</h2>
+
+<p>browserInfo - This is the library which obtains all the information. Its in its own file if you just want to gather the data.</p>
+
+<p>supportedBrowser - This is just a simple function. Given what you want and what the user has will output basic booleans to act upon.</p>
+
 <h2>What are the main ones</h2>
 
 <p>Windows xp,vista,7,8
 * Chrome
 * Firefox
-* Internet Explorer</p>
+* Internet Explorer (>=8)</p>
 
 <p>OSX 10.8, 10.9
 * Safari
@@ -47,9 +53,12 @@ can't guarantee a good user experience.</p>
 <h2>To Use</h2>
 
 <ul>
-<li>include script</li>
+<li>include scripts</li>
 <li>configure which browsers you would like to support</li>
 <li>call console.log(browserInfo);</li>
+<li>call console.log(supported);</li>
+<li>call console.log(supportedBrowser(supported));
+(See demo)</li>
 </ul>
 
 <p>This will return a boolean if the browser/os combination is in your list of supported. Along with all the information it gathered.</p>
