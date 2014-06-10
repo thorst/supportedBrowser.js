@@ -20,53 +20,53 @@
             ;
 
             // Opera
-            if ((verOffset = nAgt.indexOf('Opera')) != -1) {
+            if ((verOffset = nAgt.indexOf('Opera')) !== -1) {
                 browser = 'Opera';
                 version = nAgt.substring(verOffset + 6);
-                if ((verOffset = nAgt.indexOf('Version')) != -1) {
+                if ((verOffset = nAgt.indexOf('Version')) !== -1) {
                     version = nAgt.substring(verOffset + 8);
                 }
           
 
                 // MSIE
-            } else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
+            } else if ((verOffset = nAgt.indexOf('MSIE')) !== -1) {
                 browser = 'Microsoft Internet Explorer';
                 version = nAgt.substring(verOffset + 5);
 
 
                 //IE 11 no longer identifies itself as MS IE, so trap it
                 //http://stackoverflow.com/questions/17907445/how-to-detect-ie11
-            }  else if ((browser == 'Netscape') && (nAgt.indexOf('Trident/') != -1)) {
+            }  else if ((browser === 'Netscape') && (nAgt.indexOf('Trident/') !== -1)) {
                 browser = 'Microsoft Internet Explorer';
                 version = nAgt.substring(verOffset + 5);
-                if ((verOffset = nAgt.indexOf('rv:')) != -1) {
+                if ((verOffset = nAgt.indexOf('rv:')) !== -1) {
                     version = nAgt.substring(verOffset + 3);
                 }
          
 
                 // Chrome
-            } else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
+            } else if ((verOffset = nAgt.indexOf('Chrome')) !== -1) {
                 browser = 'Chrome';
                 version = nAgt.substring(verOffset + 7);
 
 
                 // Chrome on iPad identifies itself as Safari. However it does mention CriOS.
-            } else if ((verOffset = nAgt.indexOf('CriOS')) != -1) {
+            } else if ((verOffset = nAgt.indexOf('CriOS')) !== -1) {
                 browser = 'Chrome';
                 version = nAgt.substring(verOffset + 6);
                 
 
                 // Safari
-            } else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
+            } else if ((verOffset = nAgt.indexOf('Safari')) !== -1) {
                 browser = 'Safari';
                 version = nAgt.substring(verOffset + 7);
-                if ((verOffset = nAgt.indexOf('Version')) != -1) {
+                if ((verOffset = nAgt.indexOf('Version')) !== -1) {
                     version = nAgt.substring(verOffset + 8);
                 }
 
 
             // Firefox
-            } else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
+            } else if ((verOffset = nAgt.indexOf('Firefox')) !== -1) {
                 browser = 'Firefox';
                 version = nAgt.substring(verOffset + 8);
 
@@ -75,16 +75,16 @@
             } else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
                 browser = nAgt.substring(nameOffset, verOffset);
                 version = nAgt.substring(verOffset + 1);
-                if (browser.toLowerCase() == browser.toUpperCase()) {
+                if (browser.toLowerCase() === browser.toUpperCase()) {
                     browser = navigator.appName;
                 }
             }
 
 
             // trim the version string
-            if ((ix = version.indexOf(';')) != -1) version = version.substring(0, ix);
-            if ((ix = version.indexOf(' ')) != -1) version = version.substring(0, ix);
-            if ((ix = version.indexOf(')')) != -1) version = version.substring(0, ix);
+            if ((ix = version.indexOf(';')) !== -1) version = version.substring(0, ix);
+            if ((ix = version.indexOf(' ')) !== -1) version = version.substring(0, ix);
+            if ((ix = version.indexOf(')')) !== -1) version = version.substring(0, ix);
 
 
             // why is this here?
@@ -102,6 +102,7 @@
         },
         getDevice = function () {
             var
+                i,
                 nVer = navigator.appVersion,
                 nAgt = navigator.userAgent,
                 tabletStrings = [
@@ -146,7 +147,7 @@
                 is_phone = false,
                 device = "";
 
-            for (var i in tabletStrings) {
+            for (i in tabletStrings) {
                 if (tabletStrings[i].r.test(nAgt)) {
                     device = tabletStrings[i].s;
                     is_tablet = true;
@@ -154,7 +155,7 @@
                 }
             }
             if (device === "") {
-                for (var i in phoneStrings) {
+                for (i in phoneStrings) {
                     if (phoneStrings[i].r.test(nAgt)) {
                         device = phoneStrings[i].s;
                         is_phone = true;
@@ -172,14 +173,14 @@
 
             return {
                 screen: {
-                    width:screen.width,
-                    height:screen.height
+                    width: screen.width,
+                    height: screen.height
                 },
                 device: device,
-                isTable:is_tablet,
-                isMobile:is_mobile,
-                isPhone:is_phone
-            }
+                isTable: is_tablet,
+                isMobile: is_mobile,
+                isPhone: is_phone
+            };
         },
         getOS = function () {
             var nVer = navigator.appVersion;
