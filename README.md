@@ -4,7 +4,7 @@ Check for supported browser and features
 
 Demo
 --------
-http://thorst.github.io/Browser
+http://thorst.github.io/supportedBrowser.js/
 
 What it is
 ----------
